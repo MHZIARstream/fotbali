@@ -178,7 +178,6 @@ main{
     padding:4px 9px;
     border-radius:6px;
     font-size:11px;
-    margin-bottom:5px;
 }
 
 .finished{
@@ -229,16 +228,85 @@ main{
     border-color:#087f5b;
 }
 
-.league{
-    border-right:5px solid #087f5b;
+.hidden{
+    display:none !important;
 }
 
-.status{
-    text-align:center;
-    padding:25px;
+
+/* جدول لیگ */
+
+.league-selector{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:12px;
     background:white;
-    border-radius:14px;
-    color:#777;
+    font-family:inherit;
+    font-size:15px;
+    margin-bottom:20px;
+    outline:none;
+}
+
+.league-selector:focus{
+    border-color:#087f5b;
+}
+
+.table-box{
+    background:white;
+    border-radius:16px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    overflow-x:auto;
+}
+
+.table-title{
+    padding:18px;
+    font-size:20px;
+    font-weight:bold;
+    color:#087f5b;
+    border-bottom:1px solid #eee;
+}
+
+table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+}
+
+th{
+    background:#087f5b;
+    color:white;
+    padding:13px 8px;
+    font-size:13px;
+}
+
+td{
+    padding:13px 8px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+    font-size:13px;
+}
+
+td:nth-child(2){
+    text-align:right;
+    font-weight:bold;
+}
+
+tr:hover td{
+    background:#f7fdfb;
+}
+
+.rank{
+    font-weight:bold;
+    color:#087f5b;
+}
+
+.points{
+    font-weight:bold;
+    color:#087f5b;
+}
+
+.team-name{
+    white-space:nowrap;
 }
 
 footer{
@@ -246,10 +314,6 @@ footer{
     padding:25px;
     background:#222;
     color:#aaa;
-}
-
-.hidden{
-    display:none !important;
 }
 
 @media(max-width:700px){
@@ -306,18 +370,16 @@ footer{
 
 <main>
 
-<!-- ================= خانه ================= -->
+<!-- خانه -->
 
 <section id="home" class="page active">
 
 <div class="hero">
 <h1>به فوتبالی خوش آمدید ⚽</h1>
-
 <p>
-نتایج، بازی‌ها، لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال ایران و جهان
+نتایج، بازی‌ها، جدول لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال ایران و جهان
 </p>
 </div>
-
 
 <h2 class="section-title">🔴 بازی‌های زنده</h2>
 
@@ -349,8 +411,7 @@ footer{
 
 </div>
 
-
-<h2 class="section-title">📅 بازی‌های مهم امروز</h2>
+<h2 class="section-title">📅 بازی‌های مهم</h2>
 
 <div class="grid">
 
@@ -371,7 +432,7 @@ footer{
 </section>
 
 
-<!-- ================= بازی‌ها ================= -->
+<!-- بازی‌ها -->
 
 <section id="matches" class="page">
 
@@ -379,20 +440,11 @@ footer{
 
 <div class="tabs">
 
-<button class="tab active" data-match="today">
-📅 امروز
-</button>
-
-<button class="tab" data-match="tomorrow">
-⏭️ فردا
-</button>
-
-<button class="tab" data-match="results">
-✅ نتایج
-</button>
+<button class="tab active" data-match="today">📅 امروز</button>
+<button class="tab" data-match="tomorrow">⏭️ فردا</button>
+<button class="tab" data-match="results">✅ نتایج</button>
 
 </div>
-
 
 <input
 type="text"
@@ -401,8 +453,6 @@ class="search"
 placeholder="🔎 جستجوی نام تیم..."
 >
 
-
-<!-- امروز -->
 
 <div id="today" class="match-list">
 
@@ -495,8 +545,6 @@ placeholder="🔎 جستجوی نام تیم..."
 </div>
 
 
-<!-- فردا -->
-
 <div id="tomorrow" class="match-list hidden">
 
 <div class="match-card">
@@ -558,8 +606,6 @@ placeholder="🔎 جستجوی نام تیم..."
 
 </div>
 
-
-<!-- نتایج -->
 
 <div id="results" class="match-list hidden">
 
@@ -625,52 +671,530 @@ placeholder="🔎 جستجوی نام تیم..."
 </section>
 
 
-<!-- ================= لیگ‌ها ================= -->
+<!-- لیگ‌ها -->
 
 <section id="leagues" class="page">
 
-<h1 class="section-title">🏆 لیگ‌ها</h1>
+<h1 class="section-title">🏆 جدول لیگ‌ها</h1>
 
-<div class="grid">
+<p style="margin-bottom:15px;color:#666;">
+لیگ موردنظر را انتخاب کنید تا جدول آن نمایش داده شود.
+</p>
 
-<div class="card league">
-<h3>🇪🇸 لالیگا</h3>
-<p>اسپانیا</p>
+<select id="leagueSelect" class="league-selector">
+
+<option value="laliga">🇪🇸 لالیگا</option>
+<option value="premier">🏴 لیگ برتر انگلیس</option>
+<option value="seriea">🇮🇹 سری آ</option>
+<option value="bundesliga">🇩🇪 بوندسلیگا</option>
+<option value="ligue1">🇫🇷 لیگ ۱</option>
+<option value="iran">🇮🇷 لیگ برتر ایران</option>
+
+</select>
+
+
+<!-- لالیگا -->
+
+<div id="laliga" class="league-table">
+
+<div class="table-box">
+
+<div class="table-title">
+🇪🇸 جدول لالیگا
 </div>
 
-<div class="card league">
-<h3>🏴 لیگ برتر انگلیس</h3>
-<p>انگلیس</p>
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">⚪ رئال مادرید</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+8</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td class="team-name">🔵 بارسلونا</td>
+<td>5</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>+7</td>
+<td class="points">12</td>
+</tr>
+
+<tr>
+<td class="rank">3</td>
+<td class="team-name">🔴 اتلتیکو مادرید</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+4</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td class="rank">4</td>
+<td class="team-name">🟢 اتلتیک بیلبائو</td>
+<td>5</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>+2</td>
+<td class="points">9</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td class="team-name">🟢 ویارئال</td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>+2</td>
+<td class="points">8</td>
+</tr>
+
+</tbody>
+</table>
+
 </div>
 
-<div class="card league">
-<h3>🇮🇹 سری آ</h3>
-<p>ایتالیا</p>
 </div>
 
-<div class="card league">
-<h3>🇩🇪 بوندسلیگا</h3>
-<p>آلمان</p>
+
+<!-- لیگ برتر انگلیس -->
+
+<div id="premier" class="league-table hidden">
+
+<div class="table-box">
+
+<div class="table-title">
+🏴 جدول لیگ برتر انگلیس
 </div>
 
-<div class="card league">
-<h3>🇫🇷 لیگ ۱</h3>
-<p>فرانسه</p>
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">🔴 لیورپول</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+9</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td class="team-name">🔵 منچسترسیتی</td>
+<td>5</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>+7</td>
+<td class="points">12</td>
+</tr>
+
+<tr>
+<td class="rank">3</td>
+<td class="team-name">🔴 آرسنال</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+5</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td class="team-name">🔵 چلسی</td>
+<td>5</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>+3</td>
+<td class="points">9</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td class="team-name">⚫ نیوکاسل</td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>+2</td>
+<td class="points">8</td>
+</tr>
+
+</tbody>
+</table>
+
 </div>
 
-<div class="card league">
-<h3>🇮🇷 لیگ برتر ایران</h3>
-<p>ایران</p>
 </div>
 
-<div class="card league">
-<h3>🌍 لیگ قهرمانان اروپا</h3>
-<p>اروپا</p>
+
+<!-- سری آ -->
+
+<div id="seriea" class="league-table hidden">
+
+<div class="table-box">
+
+<div class="table-title">
+🇮🇹 جدول سری آ
 </div>
 
-<div class="card league">
-<h3>🌍 جام جهانی</h3>
-<p>بین‌المللی</p>
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">🔵 اینتر</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+8</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td class="team-name">🔴 میلان</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+5</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td class="team-name">⚫ یوونتوس</td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>+3</td>
+<td class="points">8</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td class="team-name">🔵 ناپولی</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>+1</td>
+<td class="points">7</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td class="team-name">🟣 فیورنتینا</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td class="points">7</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<!-- بوندسلیگا -->
+
+<div id="bundesliga" class="league-table hidden">
+
+<div class="table-box">
+
+<div class="table-title">
+🇩🇪 جدول بوندسلیگا
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">🔴 بایرن مونیخ</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+10</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td class="team-name">🟡 دورتموند</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+5</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td class="team-name">🔴 لایپزیگ</td>
+<td>5</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>+3</td>
+<td class="points">9</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td class="team-name">⚫ لورکوزن</td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>+2</td>
+<td class="points">8</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<!-- لیگ 1 -->
+
+<div id="ligue1" class="league-table hidden">
+
+<div class="table-box">
+
+<div class="table-title">
+🇫🇷 جدول لیگ ۱ فرانسه
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">🔵 پاری‌سن‌ژرمن</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+9</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td class="team-name">🔴 مارسی</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+4</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td class="team-name">🔴 لیون</td>
+<td>5</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+<td>+3</td>
+<td class="points">9</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<!-- لیگ ایران -->
+
+<div id="iran" class="league-table hidden">
+
+<div class="table-box">
+
+<div class="table-title">
+🇮🇷 جدول لیگ برتر ایران
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>تیم</th>
+<th>بازی</th>
+<th>برد</th>
+<th>مساوی</th>
+<th>باخت</th>
+<th>تفاضل</th>
+<th>امتیاز</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td class="rank">1</td>
+<td class="team-name">🔵 استقلال</td>
+<td>5</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>+6</td>
+<td class="points">13</td>
+</tr>
+
+<tr>
+<td class="rank">2</td>
+<td class="team-name">🔴 پرسپولیس</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>+4</td>
+<td class="points">10</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td class="team-name">🟡 سپاهان</td>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>+3</td>
+<td class="points">8</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td class="team-name">🔵 تراکتور</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>+1</td>
+<td class="points">7</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td class="team-name">🟢 ذوب‌آهن</td>
+<td>5</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>-1</td>
+<td class="points">5</td>
+</tr>
+
+</tbody>
+</table>
+
 </div>
 
 </div>
@@ -678,7 +1202,7 @@ placeholder="🔎 جستجوی نام تیم..."
 </section>
 
 
-<!-- ================= تیم‌ها ================= -->
+<!-- تیم‌ها -->
 
 <section id="teams" class="page">
 
@@ -738,7 +1262,7 @@ placeholder="🔎 جستجوی تیم..."
 </section>
 
 
-<!-- ================= بازیکنان ================= -->
+<!-- بازیکنان -->
 
 <section id="players" class="page">
 
@@ -782,7 +1306,7 @@ placeholder="🔎 جستجوی بازیکن..."
 </section>
 
 
-<!-- ================= اخبار ================= -->
+<!-- اخبار -->
 
 <section id="news" class="page">
 
@@ -818,15 +1342,13 @@ placeholder="🔎 جستجوی بازیکن..."
 
 
 <footer>
-
 <p>⚽ فوتبالی | مرجع فوتبال ایران و جهان</p>
-
 </footer>
 
 
 <script>
 
-/* ================= منوی اصلی ================= */
+/* منوی اصلی */
 
 const navButtons = document.querySelectorAll(".nav-btn");
 const pages = document.querySelectorAll(".page");
@@ -859,7 +1381,7 @@ navButtons.forEach(button => {
 });
 
 
-/* ================= تب بازی‌ها ================= */
+/* تب‌های بازی */
 
 const matchTabs = document.querySelectorAll(".tab");
 
@@ -886,7 +1408,7 @@ matchTabs.forEach(tab => {
 });
 
 
-/* ================= جستجوی بازی ================= */
+/* جستجوی بازی */
 
 const matchSearch = document.getElementById("matchSearch");
 
@@ -894,67 +1416,4 @@ matchSearch.addEventListener("input", () => {
 
     const text = matchSearch.value.trim().toLowerCase();
 
-    document.querySelectorAll("#today .searchable").forEach(match => {
-
-        const content = match.textContent.toLowerCase();
-
-        if(content.includes(text)){
-            match.classList.remove("hidden");
-        }else{
-            match.classList.add("hidden");
-        }
-
-    });
-
-});
-
-
-/* ================= جستجوی تیم ================= */
-
-const teamSearch = document.getElementById("teamSearch");
-
-teamSearch.addEventListener("input", () => {
-
-    const text = teamSearch.value.trim().toLowerCase();
-
-    document.querySelectorAll(".team-card").forEach(card => {
-
-        const content = card.textContent.toLowerCase();
-
-        if(content.includes(text)){
-            card.classList.remove("hidden");
-        }else{
-            card.classList.add("hidden");
-        }
-
-    });
-
-});
-
-
-/* ================= جستجوی بازیکن ================= */
-
-const playerSearch = document.getElementById("playerSearch");
-
-playerSearch.addEventListener("input", () => {
-
-    const text = playerSearch.value.trim().toLowerCase();
-
-    document.querySelectorAll(".player-card").forEach(card => {
-
-        const content = card.textContent.toLowerCase();
-
-        if(content.includes(text)){
-            card.classList.remove("hidden");
-        }else{
-            card.classList.add("hidden");
-        }
-
-    });
-
-});
-
-</script>
-
-</body>
-    </html>
+    document.querySelectorAll("#today .searchable").forEa
