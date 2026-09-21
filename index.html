@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فوتبالی | فوتبال زنده</title>
+<title>فوتبالی | فوتبال ایران و جهان</title>
 
 <style>
 *{
@@ -29,18 +29,19 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
 }
 
 .logo{
-    font-size:25px;
+    font-size:26px;
     font-weight:bold;
     white-space:nowrap;
 }
 
 nav{
     display:flex;
-    gap:6px;
-    flex-wrap:wrap;
+    gap:5px;
+    overflow-x:auto;
 }
 
 nav button{
@@ -52,11 +53,12 @@ nav button{
     cursor:pointer;
     font-size:14px;
     font-family:inherit;
+    white-space:nowrap;
 }
 
 nav button:hover,
 nav button.active{
-    background:rgba(255,255,255,.18);
+    background:rgba(255,255,255,.2);
 }
 
 main{
@@ -108,11 +110,37 @@ main{
     box-shadow:0 3px 12px rgba(0,0,0,.07);
 }
 
-.match{
+.card h3{
+    margin-bottom:10px;
+}
+
+.match-card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+    margin-bottom:15px;
+}
+
+.match-top{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
+    margin-bottom:18px;
+    color:#666;
+    font-size:13px;
+}
+
+.league-name{
+    font-weight:bold;
+    color:#087f5b;
+}
+
+.match{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
     text-align:center;
 }
 
@@ -121,34 +149,96 @@ main{
     font-weight:bold;
 }
 
+.team-icon{
+    font-size:30px;
+    display:block;
+    margin-bottom:8px;
+}
+
 .score{
-    font-size:20px;
+    min-width:80px;
+}
+
+.score-number{
+    font-size:24px;
     font-weight:bold;
     color:#087f5b;
+}
+
+.match-time{
+    color:#555;
+    font-size:13px;
+    margin-top:5px;
 }
 
 .live{
     display:inline-block;
     background:#e03131;
     color:white;
-    padding:4px 8px;
+    padding:4px 9px;
     border-radius:6px;
-    font-size:12px;
-    margin-bottom:8px;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.finished{
+    display:inline-block;
+    background:#868e96;
+    color:white;
+    padding:4px 9px;
+    border-radius:6px;
+    font-size:11px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+    overflow-x:auto;
+}
+
+.tab{
+    border:0;
+    background:white;
+    padding:11px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:14px;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+    white-space:nowrap;
+}
+
+.tab.active{
+    background:#087f5b;
+    color:white;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-family:inherit;
+    margin-bottom:20px;
+    font-size:15px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#087f5b;
 }
 
 .league{
     border-right:5px solid #087f5b;
 }
 
-.search{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:inherit;
-    margin-bottom:20px;
-    font-size:15px;
+.status{
+    text-align:center;
+    padding:25px;
+    background:white;
+    border-radius:14px;
+    color:#777;
 }
 
 footer{
@@ -158,23 +248,39 @@ footer{
     color:#aaa;
 }
 
+.hidden{
+    display:none !important;
+}
+
 @media(max-width:700px){
+
     header{
         flex-direction:column;
         align-items:stretch;
     }
 
-    nav{
-        overflow-x:auto;
-        flex-wrap:nowrap;
+    .logo{
+        text-align:center;
     }
 
-    nav button{
-        white-space:nowrap;
+    nav{
+        justify-content:flex-start;
     }
 
     .hero h1{
         font-size:25px;
+    }
+
+    .match{
+        gap:8px;
+    }
+
+    .team{
+        font-size:13px;
+    }
+
+    .score-number{
+        font-size:20px;
     }
 }
 </style>
@@ -197,84 +303,321 @@ footer{
 
 </header>
 
+
 <main>
 
-<!-- خانه -->
+<!-- ================= خانه ================= -->
+
 <section id="home" class="page active">
 
 <div class="hero">
 <h1>به فوتبالی خوش آمدید ⚽</h1>
+
 <p>
-مرجع نتایج، بازی‌ها، لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال ایران و جهان
+نتایج، بازی‌ها، لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال ایران و جهان
 </p>
 </div>
 
+
 <h2 class="section-title">🔴 بازی‌های زنده</h2>
 
+<div class="match-card">
+
+<div class="match-top">
+<span class="league-name">🇪🇸 لالیگا</span>
+<span class="live">LIVE</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">⚪</span>
+رئال مادرید
+</div>
+
+<div class="score">
+<div class="score-number">2 - 1</div>
+<div class="match-time">دقیقه 67</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔵</span>
+بارسلونا
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">📅 بازی‌های مهم امروز</h2>
+
 <div class="grid">
 
 <div class="card">
-<span class="live">LIVE</span>
-<div class="match">
-<div class="team">رئال مادرید</div>
-<div class="score">2 - 1</div>
-<div class="team">بارسلونا</div>
-</div>
+<h3>🔴 لیورپول</h3>
+<p>🆚 آرسنال</p>
+<p>⏰ 20:00</p>
 </div>
 
 <div class="card">
-<span class="live">LIVE</span>
-<div class="match">
-<div class="team">لیورپول</div>
-<div class="score">1 - 1</div>
-<div class="team">آرسنال</div>
-</div>
+<h3>🔵 اینتر</h3>
+<p>🆚 میلان</p>
+<p>⏰ 21:30</p>
 </div>
 
-</div>
-
-<h2 class="section-title">📰 آخرین اخبار</h2>
-
-<div class="grid">
-<div class="card">
-<h3>آخرین اخبار فوتبال ایران و جهان</h3>
-<p>به‌زودی اخبار واقعی فوتبال به این قسمت اضافه می‌شود.</p>
-</div>
-
-<div class="card">
-<h3>نقل‌وانتقالات</h3>
-<p>اطلاعات نقل‌وانتقالات نیز در این بخش قرار می‌گیرد.</p>
-</div>
 </div>
 
 </section>
 
 
-<!-- بازی‌ها -->
+<!-- ================= بازی‌ها ================= -->
+
 <section id="matches" class="page">
 
 <h1 class="section-title">⚽ بازی‌ها</h1>
 
-<input class="search" placeholder="جستجوی تیم یا بازی...">
+<div class="tabs">
 
-<div class="grid">
+<button class="tab active" data-match="today">
+📅 امروز
+</button>
 
-<div class="card">
-<h3>لالیگا</h3>
-<p>رئال مادرید 🆚 بارسلونا</p>
-<p>امروز - 22:30</p>
+<button class="tab" data-match="tomorrow">
+⏭️ فردا
+</button>
+
+<button class="tab" data-match="results">
+✅ نتایج
+</button>
+
 </div>
 
-<div class="card">
-<h3>Premier League</h3>
-<p>لیورپول 🆚 آرسنال</p>
-<p>امروز - 20:00</p>
+
+<input
+type="text"
+id="matchSearch"
+class="search"
+placeholder="🔎 جستجوی نام تیم..."
+>
+
+
+<!-- امروز -->
+
+<div id="today" class="match-list">
+
+<div class="match-card searchable">
+
+<div class="match-top">
+<span class="league-name">🇪🇸 لالیگا</span>
+<span class="live">LIVE</span>
 </div>
 
-<div class="card">
-<h3>Serie A</h3>
-<p>اینتر 🆚 میلان</p>
-<p>فردا - 21:30</p>
+<div class="match">
+
+<div class="team">
+<span class="team-icon">⚪</span>
+رئال مادرید
+</div>
+
+<div class="score">
+<div class="score-number">2 - 1</div>
+<div class="match-time">دقیقه 67</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔵</span>
+بارسلونا
+</div>
+
+</div>
+
+</div>
+
+
+<div class="match-card searchable">
+
+<div class="match-top">
+<span class="league-name">🏴 لیگ برتر انگلیس</span>
+<span>امروز</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">🔴</span>
+لیورپول
+</div>
+
+<div class="score">
+<div class="score-number">20:00</div>
+<div class="match-time">شروع بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔴</span>
+آرسنال
+</div>
+
+</div>
+
+</div>
+
+
+<div class="match-card searchable">
+
+<div class="match-top">
+<span class="league-name">🇮🇹 سری آ</span>
+<span>امروز</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">🔵</span>
+اینتر
+</div>
+
+<div class="score">
+<div class="score-number">21:30</div>
+<div class="match-time">شروع بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔴</span>
+میلان
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- فردا -->
+
+<div id="tomorrow" class="match-list hidden">
+
+<div class="match-card">
+
+<div class="match-top">
+<span class="league-name">🇩🇪 بوندسلیگا</span>
+<span>فردا</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">🔴</span>
+بایرن مونیخ
+</div>
+
+<div class="score">
+<div class="score-number">19:00</div>
+<div class="match-time">شروع بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🟡</span>
+دورتموند
+</div>
+
+</div>
+
+</div>
+
+
+<div class="match-card">
+
+<div class="match-top">
+<span class="league-name">🇫🇷 لیگ ۱</span>
+<span>فردا</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">🔵</span>
+پاری‌سن‌ژرمن
+</div>
+
+<div class="score">
+<div class="score-number">21:00</div>
+<div class="match-time">شروع بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔴</span>
+مارسی
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- نتایج -->
+
+<div id="results" class="match-list hidden">
+
+<div class="match-card">
+
+<div class="match-top">
+<span class="league-name">🇪🇸 لالیگا</span>
+<span class="finished">پایان</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">⚪</span>
+رئال مادرید
+</div>
+
+<div class="score">
+<div class="score-number">3 - 0</div>
+<div class="match-time">پایان بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🟢</span>
+سویا
+</div>
+
+</div>
+
+</div>
+
+
+<div class="match-card">
+
+<div class="match-top">
+<span class="league-name">🏴 لیگ برتر انگلیس</span>
+<span class="finished">پایان</span>
+</div>
+
+<div class="match">
+
+<div class="team">
+<span class="team-icon">🔵</span>
+منچسترسیتی
+</div>
+
+<div class="score">
+<div class="score-number">2 - 2</div>
+<div class="match-time">پایان بازی</div>
+</div>
+
+<div class="team">
+<span class="team-icon">🔴</span>
+چلسی
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -282,7 +625,8 @@ footer{
 </section>
 
 
-<!-- لیگ‌ها -->
+<!-- ================= لیگ‌ها ================= -->
+
 <section id="leagues" class="page">
 
 <h1 class="section-title">🏆 لیگ‌ها</h1>
@@ -334,43 +678,59 @@ footer{
 </section>
 
 
-<!-- تیم‌ها -->
+<!-- ================= تیم‌ها ================= -->
+
 <section id="teams" class="page">
 
 <h1 class="section-title">👕 تیم‌ها</h1>
 
-<input class="search" placeholder="جستجوی تیم...">
+<input
+type="text"
+id="teamSearch"
+class="search"
+placeholder="🔎 جستجوی تیم..."
+>
 
 <div class="grid">
 
-<div class="card">
+<div class="card team-card">
 <h3>⚪ رئال مادرید</h3>
-<p>اسپانیا</p>
+<p>🇪🇸 اسپانیا</p>
 </div>
 
-<div class="card">
+<div class="card team-card">
 <h3>🔵 بارسلونا</h3>
-<p>اسپانیا</p>
+<p>🇪🇸 اسپانیا</p>
 </div>
 
-<div class="card">
+<div class="card team-card">
 <h3>🔴 لیورپول</h3>
-<p>انگلیس</p>
+<p>🏴 انگلیس</p>
 </div>
 
-<div class="card">
+<div class="card team-card">
 <h3>🔴 آرسنال</h3>
-<p>انگلیس</p>
+<p>🏴 انگلیس</p>
 </div>
 
-<div class="card">
+<div class="card team-card">
 <h3>🔵 اینتر</h3>
-<p>ایتالیا</p>
+<p>🇮🇹 ایتالیا</p>
 </div>
 
-<div class="card">
+<div class="card team-card">
 <h3>🔴 میلان</h3>
-<p>ایتالیا</p>
+<p>🇮🇹 ایتالیا</p>
+</div>
+
+<div class="card team-card">
+<h3>🔴 بایرن مونیخ</h3>
+<p>🇩🇪 آلمان</p>
+</div>
+
+<div class="card team-card">
+<h3>🔵 پاری‌سن‌ژرمن</h3>
+<p>🇫🇷 فرانسه</p>
 </div>
 
 </div>
@@ -378,37 +738,43 @@ footer{
 </section>
 
 
-<!-- بازیکنان -->
+<!-- ================= بازیکنان ================= -->
+
 <section id="players" class="page">
 
 <h1 class="section-title">👤 بازیکنان</h1>
 
-<input class="search" placeholder="جستجوی بازیکن...">
+<input
+type="text"
+id="playerSearch"
+class="search"
+placeholder="🔎 جستجوی بازیکن..."
+>
 
 <div class="grid">
 
-<div class="card">
-<h3>کریستیانو رونالدو</h3>
+<div class="card player-card">
+<h3>⭐ کریستیانو رونالدو</h3>
 <p>🇵🇹 پرتغال</p>
-<p>مهاجم</p>
+<p>⚽ مهاجم</p>
 </div>
 
-<div class="card">
-<h3>کیلیان امباپه</h3>
+<div class="card player-card">
+<h3>⭐ کیلیان امباپه</h3>
 <p>🇫🇷 فرانسه</p>
-<p>مهاجم</p>
+<p>⚽ مهاجم</p>
 </div>
 
-<div class="card">
-<h3>لامین یامال</h3>
+<div class="card player-card">
+<h3>⭐ لامین یامال</h3>
 <p>🇪🇸 اسپانیا</p>
-<p>مهاجم</p>
+<p>⚽ مهاجم</p>
 </div>
 
-<div class="card">
-<h3>محمد صلاح</h3>
+<div class="card player-card">
+<h3>⭐ محمد صلاح</h3>
 <p>🇪🇬 مصر</p>
-<p>مهاجم</p>
+<p>⚽ مهاجم</p>
 </div>
 
 </div>
@@ -416,7 +782,8 @@ footer{
 </section>
 
 
-<!-- اخبار -->
+<!-- ================= اخبار ================= -->
+
 <section id="news" class="page">
 
 <h1 class="section-title">📰 اخبار فوتبال</h1>
@@ -425,7 +792,7 @@ footer{
 
 <div class="card">
 <h3>⚽ اخبار فوتبال جهان</h3>
-<p>آخرین اخبار فوتبال جهان در این قسمت نمایش داده خواهد شد.</p>
+<p>آخرین اخبار فوتبال جهان در این بخش قرار می‌گیرد.</p>
 </div>
 
 <div class="card">
@@ -435,7 +802,7 @@ footer{
 
 <div class="card">
 <h3>🔄 نقل‌وانتقالات</h3>
-<p>آخرین اخبار مربوط به نقل‌وانتقالات بازیکنان.</p>
+<p>آخرین اخبار نقل‌وانتقالات بازیکنان.</p>
 </div>
 
 <div class="card">
@@ -449,23 +816,28 @@ footer{
 
 </main>
 
+
 <footer>
+
 <p>⚽ فوتبالی | مرجع فوتبال ایران و جهان</p>
+
 </footer>
 
 
 <script>
 
-const buttons = document.querySelectorAll(".nav-btn");
+/* ================= منوی اصلی ================= */
+
+const navButtons = document.querySelectorAll(".nav-btn");
 const pages = document.querySelectorAll(".page");
 
-buttons.forEach(button => {
+navButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
         const target = button.dataset.page;
 
-        buttons.forEach(btn => {
+        navButtons.forEach(btn => {
             btn.classList.remove("active");
         });
 
@@ -486,7 +858,103 @@ buttons.forEach(button => {
 
 });
 
+
+/* ================= تب بازی‌ها ================= */
+
+const matchTabs = document.querySelectorAll(".tab");
+
+matchTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        const target = tab.dataset.match;
+
+        matchTabs.forEach(t => {
+            t.classList.remove("active");
+        });
+
+        tab.classList.add("active");
+
+        document.querySelectorAll(".match-list").forEach(list => {
+            list.classList.add("hidden");
+        });
+
+        document.getElementById(target).classList.remove("hidden");
+
+    });
+
+});
+
+
+/* ================= جستجوی بازی ================= */
+
+const matchSearch = document.getElementById("matchSearch");
+
+matchSearch.addEventListener("input", () => {
+
+    const text = matchSearch.value.trim().toLowerCase();
+
+    document.querySelectorAll("#today .searchable").forEach(match => {
+
+        const content = match.textContent.toLowerCase();
+
+        if(content.includes(text)){
+            match.classList.remove("hidden");
+        }else{
+            match.classList.add("hidden");
+        }
+
+    });
+
+});
+
+
+/* ================= جستجوی تیم ================= */
+
+const teamSearch = document.getElementById("teamSearch");
+
+teamSearch.addEventListener("input", () => {
+
+    const text = teamSearch.value.trim().toLowerCase();
+
+    document.querySelectorAll(".team-card").forEach(card => {
+
+        const content = card.textContent.toLowerCase();
+
+        if(content.includes(text)){
+            card.classList.remove("hidden");
+        }else{
+            card.classList.add("hidden");
+        }
+
+    });
+
+});
+
+
+/* ================= جستجوی بازیکن ================= */
+
+const playerSearch = document.getElementById("playerSearch");
+
+playerSearch.addEventListener("input", () => {
+
+    const text = playerSearch.value.trim().toLowerCase();
+
+    document.querySelectorAll(".player-card").forEach(card => {
+
+        const content = card.textContent.toLowerCase();
+
+        if(content.includes(text)){
+            card.classList.remove("hidden");
+        }else{
+            card.classList.add("hidden");
+        }
+
+    });
+
+});
+
 </script>
 
 </body>
-  </html>
+    </html>
