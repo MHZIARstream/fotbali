@@ -3,349 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فوتبالی | فوتبال ایران و جهان</title>
+<title>⚽ فوتبالی | نتایج و اخبار فوتبال</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f4f6f8;
-    color:#222;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f4f6f8;
+  color:#222;
 }
 
 header{
-    background:#087f5b;
-    color:white;
-    padding:15px 5%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  background:#0b7a45;
+  color:white;
+  padding:18px 5%;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 10px #0002;
+}
+
+.header{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
 }
 
 .logo{
-    font-size:26px;
-    font-weight:bold;
-    white-space:nowrap;
+  font-size:25px;
+  font-weight:bold;
+  white-space:nowrap;
 }
 
 nav{
-    display:flex;
-    gap:5px;
-    overflow-x:auto;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 nav button{
-    border:0;
-    background:transparent;
-    color:white;
-    padding:10px 13px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
-    font-family:inherit;
-    white-space:nowrap;
+  border:0;
+  background:transparent;
+  color:white;
+  padding:9px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
 }
 
 nav button:hover,
 nav button.active{
-    background:rgba(255,255,255,.2);
+  background:#ffffff25;
 }
 
-main{
-    max-width:1200px;
-    margin:auto;
-    padding:25px 15px 50px;
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 5%;
 }
 
 .page{
-    display:none;
+  display:none;
 }
 
 .page.active{
-    display:block;
+  display:block;
 }
 
 .hero{
-    background:linear-gradient(135deg,#087f5b,#0ca678);
-    color:white;
-    padding:45px 25px;
-    border-radius:18px;
-    margin-bottom:25px;
+  background:linear-gradient(135deg,#0b7a45,#13a765);
+  color:white;
+  padding:40px 25px;
+  border-radius:18px;
+  margin-bottom:25px;
+  text-align:center;
 }
 
 .hero h1{
-    font-size:32px;
-    margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:12px;
 }
 
 .hero p{
-    line-height:2;
+  font-size:16px;
+  opacity:.95;
 }
 
 .section-title{
-    margin:25px 0 15px;
-    font-size:23px;
+  font-size:24px;
+  margin:25px 0 15px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
 }
 
 .card{
-    background:white;
-    border-radius:14px;
-    padding:18px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 3px 12px #00000012;
 }
 
 .card h3{
-    margin-bottom:10px;
-}
-
-.match-card{
-    background:white;
-    border-radius:16px;
-    padding:18px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
-    margin-bottom:15px;
-}
-
-.match-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    color:#666;
-    font-size:13px;
-}
-
-.league-name{
-    font-weight:bold;
-    color:#087f5b;
+  margin-bottom:10px;
 }
 
 .match{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:25px;
-    text-align:center;
+  background:white;
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:12px;
+  box-shadow:0 3px 12px #00000012;
 }
 
-.team{
-    flex:1;
-    font-weight:bold;
+.match-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  font-size:13px;
+  color:#666;
 }
 
-.team-icon{
-    font-size:30px;
-    display:block;
-    margin-bottom:8px;
-}
-
-.score{
-    min-width:80px;
-}
-
-.score-number{
-    font-size:24px;
-    font-weight:bold;
-    color:#087f5b;
-}
-
-.match-time{
-    color:#555;
-    font-size:13px;
-    margin-top:5px;
+.league{
+  font-weight:bold;
+  color:#0b7a45;
 }
 
 .live{
-    display:inline-block;
-    background:#e03131;
-    color:white;
-    padding:4px 9px;
-    border-radius:6px;
-    font-size:11px;
+  color:#e53935;
+  font-weight:bold;
 }
 
-.finished{
-    display:inline-block;
-    background:#868e96;
-    color:white;
-    padding:4px 9px;
-    border-radius:6px;
-    font-size:11px;
+.teams{
+  display:grid;
+  grid-template-columns:1fr 90px 1fr;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+}
+
+.team{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.score{
+  font-size:23px;
+  font-weight:bold;
 }
 
 .tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:20px;
-    overflow-x:auto;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
 }
 
-.tab{
-    border:0;
-    background:white;
-    padding:11px 20px;
-    border-radius:10px;
-    cursor:pointer;
-    font-family:inherit;
-    font-size:14px;
-    box-shadow:0 2px 7px rgba(0,0,0,.06);
-    white-space:nowrap;
+.tabs button,
+.select-box,
+.search{
+  border:1px solid #ddd;
+  background:white;
+  padding:11px 15px;
+  border-radius:9px;
+  cursor:pointer;
 }
 
-.tab.active{
-    background:#087f5b;
-    color:white;
+.tabs button.active{
+  background:#0b7a45;
+  color:white;
+  border-color:#0b7a45;
 }
 
 .search{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:inherit;
-    margin-bottom:20px;
-    font-size:15px;
-    outline:none;
+  width:100%;
+  margin-bottom:18px;
+  outline:none;
 }
 
 .search:focus{
-    border-color:#087f5b;
+  border-color:#0b7a45;
 }
 
-.hidden{
-    display:none !important;
-}
-
-
-/* جدول لیگ */
-
-.league-selector{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    background:white;
-    font-family:inherit;
-    font-size:15px;
-    margin-bottom:20px;
-    outline:none;
-}
-
-.league-selector:focus{
-    border-color:#087f5b;
-}
-
-.table-box{
-    background:white;
-    border-radius:16px;
-    box-shadow:0 3px 12px rgba(0,0,0,.07);
-    overflow-x:auto;
-}
-
-.table-title{
-    padding:18px;
-    font-size:20px;
-    font-weight:bold;
-    color:#087f5b;
-    border-bottom:1px solid #eee;
+.table-wrapper{
+  overflow-x:auto;
+  background:white;
+  border-radius:15px;
+  box-shadow:0 3px 12px #00000012;
 }
 
 table{
-    width:100%;
-    min-width:700px;
-    border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+th,td{
+  padding:13px 10px;
+  text-align:center;
+  border-bottom:1px solid #eee;
 }
 
 th{
-    background:#087f5b;
-    color:white;
-    padding:13px 8px;
-    font-size:13px;
+  background:#0b7a45;
+  color:white;
 }
 
-td{
-    padding:13px 8px;
-    text-align:center;
-    border-bottom:1px solid #eee;
-    font-size:13px;
+tr:hover{
+  background:#f5faf7;
 }
 
-td:nth-child(2){
-    text-align:right;
-    font-weight:bold;
+.position{
+  font-weight:bold;
 }
 
-tr:hover td{
-    background:#f7fdfb;
+.news{
+  background:white;
+  padding:18px;
+  border-radius:15px;
+  margin-bottom:12px;
+  box-shadow:0 3px 12px #00000012;
 }
 
-.rank{
-    font-weight:bold;
-    color:#087f5b;
+.news h3{
+  margin-bottom:8px;
 }
 
-.points{
-    font-weight:bold;
-    color:#087f5b;
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#e8f5ee;
+  color:#0b7a45;
+  font-size:12px;
+  margin-bottom:8px;
 }
 
-.team-name{
-    white-space:nowrap;
+.player{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:white;
+  border-radius:12px;
+  margin-bottom:10px;
+  box-shadow:0 2px 8px #00000010;
 }
 
 footer{
-    text-align:center;
-    padding:25px;
-    background:#222;
-    color:#aaa;
+  margin-top:40px;
+  background:#123;
+  color:white;
+  text-align:center;
+  padding:25px;
 }
 
 @media(max-width:700px){
+  .header{
+    flex-direction:column;
+  }
 
-    header{
-        flex-direction:column;
-        align-items:stretch;
-    }
+  nav{
+    width:100%;
+  }
 
-    .logo{
-        text-align:center;
-    }
+  nav button{
+    font-size:12px;
+    padding:8px;
+  }
 
-    nav{
-        justify-content:flex-start;
-    }
+  .hero h1{
+    font-size:25px;
+  }
 
-    .hero h1{
-        font-size:25px;
-    }
+  .teams{
+    grid-template-columns:1fr 70px 1fr;
+  }
 
-    .match{
-        gap:8px;
-    }
-
-    .team{
-        font-size:13px;
-    }
-
-    .score-number{
-        font-size:20px;
-    }
+  .team{
+    font-size:14px;
+  }
 }
 </style>
 </head>
@@ -353,988 +303,282 @@ footer{
 <body>
 
 <header>
+  <div class="header">
+    <div class="logo">⚽ فوتبالی</div>
 
-<div class="logo">⚽ فوتبالی</div>
-
-<nav>
-<button class="nav-btn active" data-page="home">🏠 خانه</button>
-<button class="nav-btn" data-page="matches">⚽ بازی‌ها</button>
-<button class="nav-btn" data-page="leagues">🏆 لیگ‌ها</button>
-<button class="nav-btn" data-page="teams">👕 تیم‌ها</button>
-<button class="nav-btn" data-page="players">👤 بازیکنان</button>
-<button class="nav-btn" data-page="news">📰 اخبار</button>
-</nav>
-
+    <nav>
+      <button class="active" onclick="showPage('home',this)">🏠 خانه</button>
+      <button onclick="showPage('games',this)">⚽ بازی‌ها</button>
+      <button onclick="showPage('leagues',this)">🏆 لیگ‌ها</button>
+      <button onclick="showPage('teams',this)">👕 تیم‌ها</button>
+      <button onclick="showPage('players',this)">👤 بازیکنان</button>
+      <button onclick="showPage('news',this)">📰 اخبار</button>
+    </nav>
+  </div>
 </header>
 
-
-<main>
-
-<!-- خانه -->
+<main class="container">
 
 <section id="home" class="page active">
 
-<div class="hero">
-<h1>به فوتبالی خوش آمدید ⚽</h1>
-<p>
-نتایج، بازی‌ها، جدول لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال ایران و جهان
-</p>
-</div>
+  <div class="hero">
+    <h1>به فوتبالی خوش آمدید ⚽</h1>
+    <p>نتایج، بازی‌ها، لیگ‌ها، تیم‌ها، بازیکنان و اخبار فوتبال</p>
+  </div>
 
-<h2 class="section-title">🔴 بازی‌های زنده</h2>
+  <h2 class="section-title">🔥 بازی‌های مهم</h2>
 
-<div class="match-card">
+  <div class="cards">
 
-<div class="match-top">
-<span class="league-name">🇪🇸 لالیگا</span>
-<span class="live">LIVE</span>
-</div>
+    <div class="card">
+      <h3>🇪🇸 رئال مادرید</h3>
+      <p>اطلاعات تیم و نتایج بازی‌ها</p>
+    </div>
 
-<div class="match">
+    <div class="card">
+      <h3>🇪🇸 بارسلونا</h3>
+      <p>اطلاعات تیم و نتایج بازی‌ها</p>
+    </div>
 
-<div class="team">
-<span class="team-icon">⚪</span>
-رئال مادرید
-</div>
+    <div class="card">
+      <h3>🏴 لیورپول</h3>
+      <p>اطلاعات تیم و نتایج بازی‌ها</p>
+    </div>
 
-<div class="score">
-<div class="score-number">2 - 1</div>
-<div class="match-time">دقیقه 67</div>
-</div>
+    <div class="card">
+      <h3>🇮🇹 اینتر</h3>
+      <p>اطلاعات تیم و نتایج بازی‌ها</p>
+    </div>
 
-<div class="team">
-<span class="team-icon">🔵</span>
-بارسلونا
-</div>
+  </div>
 
-</div>
+  <h2 class="section-title">📰 آخرین اخبار</h2>
 
-</div>
-
-<h2 class="section-title">📅 بازی‌های مهم</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>🔴 لیورپول</h3>
-<p>🆚 آرسنال</p>
-<p>⏰ 20:00</p>
-</div>
-
-<div class="card">
-<h3>🔵 اینتر</h3>
-<p>🆚 میلان</p>
-<p>⏰ 21:30</p>
-</div>
-
-</div>
+  <div class="news">
+    <span class="badge">فوتبال جهان</span>
+    <h3>آخرین اخبار فوتبال در فوتبالی</h3>
+    <p>اخبار و اتفاقات مهم فوتبال را اینجا دنبال کنید.</p>
+  </div>
 
 </section>
 
 
-<!-- بازی‌ها -->
-
-<section id="matches" class="page">
-
-<h1 class="section-title">⚽ بازی‌ها</h1>
-
-<div class="tabs">
-
-<button class="tab active" data-match="today">📅 امروز</button>
-<button class="tab" data-match="tomorrow">⏭️ فردا</button>
-<button class="tab" data-match="results">✅ نتایج</button>
-
-</div>
-
-<input
-type="text"
-id="matchSearch"
-class="search"
-placeholder="🔎 جستجوی نام تیم..."
->
-
-
-<div id="today" class="match-list">
-
-<div class="match-card searchable">
-
-<div class="match-top">
-<span class="league-name">🇪🇸 لالیگا</span>
-<span class="live">LIVE</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">⚪</span>
-رئال مادرید
-</div>
-
-<div class="score">
-<div class="score-number">2 - 1</div>
-<div class="match-time">دقیقه 67</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🔵</span>
-بارسلونا
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-card searchable">
-
-<div class="match-top">
-<span class="league-name">🏴 لیگ برتر انگلیس</span>
-<span>امروز</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">🔴</span>
-لیورپول
-</div>
-
-<div class="score">
-<div class="score-number">20:00</div>
-<div class="match-time">شروع بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🔴</span>
-آرسنال
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-card searchable">
-
-<div class="match-top">
-<span class="league-name">🇮🇹 سری آ</span>
-<span>امروز</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">🔵</span>
-اینتر
-</div>
-
-<div class="score">
-<div class="score-number">21:30</div>
-<div class="match-time">شروع بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🔴</span>
-میلان
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="tomorrow" class="match-list hidden">
-
-<div class="match-card">
-
-<div class="match-top">
-<span class="league-name">🇩🇪 بوندسلیگا</span>
-<span>فردا</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">🔴</span>
-بایرن مونیخ
-</div>
-
-<div class="score">
-<div class="score-number">19:00</div>
-<div class="match-time">شروع بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🟡</span>
-دورتموند
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-card">
-
-<div class="match-top">
-<span class="league-name">🇫🇷 لیگ ۱</span>
-<span>فردا</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">🔵</span>
-پاری‌سن‌ژرمن
-</div>
-
-<div class="score">
-<div class="score-number">21:00</div>
-<div class="match-time">شروع بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🔴</span>
-مارسی
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="results" class="match-list hidden">
-
-<div class="match-card">
-
-<div class="match-top">
-<span class="league-name">🇪🇸 لالیگا</span>
-<span class="finished">پایان</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">⚪</span>
-رئال مادرید
-</div>
-
-<div class="score">
-<div class="score-number">3 - 0</div>
-<div class="match-time">پایان بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🟢</span>
-سویا
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-card">
-
-<div class="match-top">
-<span class="league-name">🏴 لیگ برتر انگلیس</span>
-<span class="finished">پایان</span>
-</div>
-
-<div class="match">
-
-<div class="team">
-<span class="team-icon">🔵</span>
-منچسترسیتی
-</div>
-
-<div class="score">
-<div class="score-number">2 - 2</div>
-<div class="match-time">پایان بازی</div>
-</div>
-
-<div class="team">
-<span class="team-icon">🔴</span>
-چلسی
-</div>
-
-</div>
-
-</div>
-
-</div>
+<section id="games" class="page">
+
+  <h2 class="section-title">⚽ بازی‌ها</h2>
+
+  <div class="tabs">
+    <button class="active" onclick="filterGames('today',this)">امروز</button>
+    <button onclick="filterGames('tomorrow',this)">فردا</button>
+    <button onclick="filterGames('results',this)">نتایج</button>
+  </div>
+
+  <input
+    id="teamSearch"
+    class="search"
+    type="text"
+    placeholder="🔎 جستجوی تیم..."
+    oninput="searchGames()"
+  >
+
+  <div id="gamesList">
+
+    <div class="match" data-day="today">
+      <div class="match-top">
+        <span class="league">🏆 لالیگا</span>
+        <span class="live">🔴 LIVE</span>
+      </div>
+
+      <div class="teams">
+        <div class="team">رئال مادرید</div>
+        <div class="score">2 - 1</div>
+        <div class="team">بارسلونا</div>
+      </div>
+    </div>
+
+    <div class="match" data-day="today">
+      <div class="match-top">
+        <span class="league">🏆 Premier League</span>
+        <span>21:30</span>
+      </div>
+
+      <div class="teams">
+        <div class="team">لیورپول</div>
+        <div class="score">-</div>
+        <div class="team">آرسنال</div>
+      </div>
+    </div>
+
+    <div class="match" data-day="tomorrow">
+      <div class="match-top">
+        <span class="league">🏆 Serie A</span>
+        <span>20:00</span>
+      </div>
+
+      <div class="teams">
+        <div class="team">اینتر</div>
+        <div class="score">-</div>
+        <div class="team">میلان</div>
+      </div>
+    </div>
+
+    <div class="match" data-day="results">
+      <div class="match-top">
+        <span class="league">🏆 Bundesliga</span>
+        <span>پایان</span>
+      </div>
+
+      <div class="teams">
+        <div class="team">بایرن مونیخ</div>
+        <div class="score">3 - 0</div>
+        <div class="team">دورتموند</div>
+      </div>
+    </div>
+
+  </div>
 
 </section>
 
-
-<!-- لیگ‌ها -->
 
 <section id="leagues" class="page">
 
-<h1 class="section-title">🏆 جدول لیگ‌ها</h1>
-
-<p style="margin-bottom:15px;color:#666;">
-لیگ موردنظر را انتخاب کنید تا جدول آن نمایش داده شود.
-</p>
-
-<select id="leagueSelect" class="league-selector">
-
-<option value="laliga">🇪🇸 لالیگا</option>
-<option value="premier">🏴 لیگ برتر انگلیس</option>
-<option value="seriea">🇮🇹 سری آ</option>
-<option value="bundesliga">🇩🇪 بوندسلیگا</option>
-<option value="ligue1">🇫🇷 لیگ ۱</option>
-<option value="iran">🇮🇷 لیگ برتر ایران</option>
-
-</select>
-
-
-<!-- لالیگا -->
-
-<div id="laliga" class="league-table">
-
-<div class="table-box">
-
-<div class="table-title">
-🇪🇸 جدول لالیگا
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">⚪ رئال مادرید</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+8</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td class="rank">2</td>
-<td class="team-name">🔵 بارسلونا</td>
-<td>5</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-<td>+7</td>
-<td class="points">12</td>
-</tr>
-
-<tr>
-<td class="rank">3</td>
-<td class="team-name">🔴 اتلتیکو مادرید</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+4</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td class="rank">4</td>
-<td class="team-name">🟢 اتلتیک بیلبائو</td>
-<td>5</td>
-<td>3</td>
-<td>0</td>
-<td>2</td>
-<td>+2</td>
-<td class="points">9</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td class="team-name">🟢 ویارئال</td>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>+2</td>
-<td class="points">8</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-
-<!-- لیگ برتر انگلیس -->
-
-<div id="premier" class="league-table hidden">
-
-<div class="table-box">
-
-<div class="table-title">
-🏴 جدول لیگ برتر انگلیس
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">🔴 لیورپول</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+9</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td class="rank">2</td>
-<td class="team-name">🔵 منچسترسیتی</td>
-<td>5</td>
-<td>4</td>
-<td>0</td>
-<td>1</td>
-<td>+7</td>
-<td class="points">12</td>
-</tr>
-
-<tr>
-<td class="rank">3</td>
-<td class="team-name">🔴 آرسنال</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+5</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td class="team-name">🔵 چلسی</td>
-<td>5</td>
-<td>3</td>
-<td>0</td>
-<td>2</td>
-<td>+3</td>
-<td class="points">9</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td class="team-name">⚫ نیوکاسل</td>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>+2</td>
-<td class="points">8</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-
-<!-- سری آ -->
-
-<div id="seriea" class="league-table hidden">
-
-<div class="table-box">
-
-<div class="table-title">
-🇮🇹 جدول سری آ
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">🔵 اینتر</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+8</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td class="rank">2</td>
-<td class="team-name">🔴 میلان</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+5</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td class="team-name">⚫ یوونتوس</td>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>+3</td>
-<td class="points">8</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td class="team-name">🔵 ناپولی</td>
-<td>5</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>+1</td>
-<td class="points">7</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td class="team-name">🟣 فیورنتینا</td>
-<td>5</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>0</td>
-<td class="points">7</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-
-<!-- بوندسلیگا -->
-
-<div id="bundesliga" class="league-table hidden">
-
-<div class="table-box">
-
-<div class="table-title">
-🇩🇪 جدول بوندسلیگا
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">🔴 بایرن مونیخ</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+10</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td class="rank">2</td>
-<td class="team-name">🟡 دورتموند</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+5</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td class="team-name">🔴 لایپزیگ</td>
-<td>5</td>
-<td>3</td>
-<td>0</td>
-<td>2</td>
-<td>+3</td>
-<td class="points">9</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td class="team-name">⚫ لورکوزن</td>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>+2</td>
-<td class="points">8</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-
-<!-- لیگ 1 -->
-
-<div id="ligue1" class="league-table hidden">
-
-<div class="table-box">
-
-<div class="table-title">
-🇫🇷 جدول لیگ ۱ فرانسه
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">🔵 پاری‌سن‌ژرمن</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+9</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td class="team-name">🔴 مارسی</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+4</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td class="team-name">🔴 لیون</td>
-<td>5</td>
-<td>3</td>
-<td>0</td>
-<td>2</td>
-<td>+3</td>
-<td class="points">9</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-
-<!-- لیگ ایران -->
-
-<div id="iran" class="league-table hidden">
-
-<div class="table-box">
-
-<div class="table-title">
-🇮🇷 جدول لیگ برتر ایران
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>#</th>
-<th>تیم</th>
-<th>بازی</th>
-<th>برد</th>
-<th>مساوی</th>
-<th>باخت</th>
-<th>تفاضل</th>
-<th>امتیاز</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td class="rank">1</td>
-<td class="team-name">🔵 استقلال</td>
-<td>5</td>
-<td>4</td>
-<td>1</td>
-<td>0</td>
-<td>+6</td>
-<td class="points">13</td>
-</tr>
-
-<tr>
-<td class="rank">2</td>
-<td class="team-name">🔴 پرسپولیس</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-<td>1</td>
-<td>+4</td>
-<td class="points">10</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td class="team-name">🟡 سپاهان</td>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>+3</td>
-<td class="points">8</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td class="team-name">🔵 تراکتور</td>
-<td>5</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>+1</td>
-<td class="points">7</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td class="team-name">🟢 ذوب‌آهن</td>
-<td>5</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>-1</td>
-<td class="points">5</td>
-</tr>
-
-</tbody>
-</table>
-
-</div>
-
-</div>
+  <h2 class="section-title">🏆 جدول لیگ‌ها</h2>
+
+  <select id="leagueSelect" class="select-box" onchange="changeLeague()">
+    <option value="laliga">🇪🇸 لالیگا</option>
+    <option value="premier">🏴 لیگ برتر انگلیس</option>
+    <option value="seriea">🇮🇹 سری آ</option>
+    <option value="bundesliga">🇩🇪 بوندسلیگا</option>
+    <option value="ligue1">🇫🇷 لیگ ۱ فرانسه</option>
+    <option value="iran">🇮🇷 لیگ برتر ایران</option>
+  </select>
+
+  <div id="leagueTable" style="margin-top:20px;"></div>
 
 </section>
 
-
-<!-- تیم‌ها -->
 
 <section id="teams" class="page">
 
-<h1 class="section-title">👕 تیم‌ها</h1>
+  <h2 class="section-title">👕 تیم‌ها</h2>
 
-<input
-type="text"
-id="teamSearch"
-class="search"
-placeholder="🔎 جستجوی تیم..."
->
+  <input
+    id="teamPageSearch"
+    class="search"
+    type="text"
+    placeholder="🔎 جستجوی تیم..."
+    oninput="searchTeams()"
+  >
 
-<div class="grid">
+  <div id="teamsList" class="cards">
 
-<div class="card team-card">
-<h3>⚪ رئال مادرید</h3>
-<p>🇪🇸 اسپانیا</p>
-</div>
+    <div class="card searchable">
+      <h3>🇪🇸 رئال مادرید</h3>
+      <p>اسپانیا</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔵 بارسلونا</h3>
-<p>🇪🇸 اسپانیا</p>
-</div>
+    <div class="card searchable">
+      <h3>🇪🇸 بارسلونا</h3>
+      <p>اسپانیا</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔴 لیورپول</h3>
-<p>🏴 انگلیس</p>
-</div>
+    <div class="card searchable">
+      <h3>🏴 لیورپول</h3>
+      <p>انگلیس</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔴 آرسنال</h3>
-<p>🏴 انگلیس</p>
-</div>
+    <div class="card searchable">
+      <h3>🏴 آرسنال</h3>
+      <p>انگلیس</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔵 اینتر</h3>
-<p>🇮🇹 ایتالیا</p>
-</div>
+    <div class="card searchable">
+      <h3>🇮🇹 اینتر</h3>
+      <p>ایتالیا</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔴 میلان</h3>
-<p>🇮🇹 ایتالیا</p>
-</div>
+    <div class="card searchable">
+      <h3>🇩🇪 بایرن مونیخ</h3>
+      <p>آلمان</p>
+    </div>
 
-<div class="card team-card">
-<h3>🔴 بایرن مونیخ</h3>
-<p>🇩🇪 آلمان</p>
-</div>
-
-<div class="card team-card">
-<h3>🔵 پاری‌سن‌ژرمن</h3>
-<p>🇫🇷 فرانسه</p>
-</div>
-
-</div>
+  </div>
 
 </section>
 
-
-<!-- بازیکنان -->
 
 <section id="players" class="page">
 
-<h1 class="section-title">👤 بازیکنان</h1>
+  <h2 class="section-title">👤 بازیکنان</h2>
 
-<input
-type="text"
-id="playerSearch"
-class="search"
-placeholder="🔎 جستجوی بازیکن..."
->
+  <input
+    id="playerSearch"
+    class="search"
+    type="text"
+    placeholder="🔎 جستجوی بازیکن..."
+    oninput="searchPlayers()"
+  >
 
-<div class="grid">
+  <div id="playersList">
 
-<div class="card player-card">
-<h3>⭐ کریستیانو رونالدو</h3>
-<p>🇵🇹 پرتغال</p>
-<p>⚽ مهاجم</p>
-</div>
+    <div class="player searchable">
+      <div>
+        <strong>کیلیان امباپه</strong>
+        <p>رئال مادرید 🇪🇸</p>
+      </div>
+      <span>⚽ مهاجم</span>
+    </div>
 
-<div class="card player-card">
-<h3>⭐ کیلیان امباپه</h3>
-<p>🇫🇷 فرانسه</p>
-<p>⚽ مهاجم</p>
-</div>
+    <div class="player searchable">
+      <div>
+        <strong>وینیسیوس جونیور</strong>
+        <p>رئال مادرید 🇪🇸</p>
+      </div>
+      <span>⚽ مهاجم</span>
+    </div>
 
-<div class="card player-card">
-<h3>⭐ لامین یامال</h3>
-<p>🇪🇸 اسپانیا</p>
-<p>⚽ مهاجم</p>
-</div>
+    <div class="player searchable">
+      <div>
+        <strong>محمد صلاح</strong>
+        <p>لیورپول 🏴</p>
+      </div>
+      <span>⚽ مهاجم</span>
+    </div>
 
-<div class="card player-card">
-<h3>⭐ محمد صلاح</h3>
-<p>🇪🇬 مصر</p>
-<p>⚽ مهاجم</p>
-</div>
+    <div class="player searchable">
+      <div>
+        <strong>لامین یامال</strong>
+        <p>بارسلونا 🇪🇸</p>
+      </div>
+      <span>⚽ مهاجم</span>
+    </div>
 
-</div>
+  </div>
 
 </section>
 
 
-<!-- اخبار -->
-
 <section id="news" class="page">
 
-<h1 class="section-title">📰 اخبار فوتبال</h1>
+  <h2 class="section-title">📰 اخبار فوتبال</h2>
 
-<div class="grid">
+  <div class="news">
+    <span class="badge">فوتبال جهان</span>
+    <h3>آخرین اخبار فوتبال</h3>
+    <p>در این قسمت اخبار فوتبال جهان قرار می‌گیرد.</p>
+  </div>
 
-<div class="card">
-<h3>⚽ اخبار فوتبال جهان</h3>
-<p>آخرین اخبار فوتبال جهان در این بخش قرار می‌گیرد.</p>
-</div>
+  <div class="news">
+    <span class="badge">لالیگا</span>
+    <h3>اخبار تیم‌های اسپانیایی</h3>
+    <p>آخرین اخبار مربوط به تیم‌های لالیگا.</p>
+  </div>
 
-<div class="card">
-<h3>🇮🇷 اخبار فوتبال ایران</h3>
-<p>اخبار تیم‌های ایرانی و لیگ برتر ایران.</p>
-</div>
-
-<div class="card">
-<h3>🔄 نقل‌وانتقالات</h3>
-<p>آخرین اخبار نقل‌وانتقالات بازیکنان.</p>
-</div>
-
-<div class="card">
-<h3>🏆 مسابقات مهم</h3>
-<p>اطلاعات مسابقات و رقابت‌های مهم فوتبال.</p>
-</div>
-
-</div>
+  <div class="news">
+    <span class="badge">ایران</span>
+    <h3>اخبار فوتبال ایران</h3>
+    <p>آخرین اخبار لیگ برتر ایران.</p>
+  </div>
 
 </section>
 
@@ -1342,78 +586,231 @@ placeholder="🔎 جستجوی بازیکن..."
 
 
 <footer>
-<p>⚽ فوتبالی | مرجع فوتبال ایران و جهان</p>
+  <p>⚽ فوتبالی | مرجع فوتبال</p>
+  <p style="margin-top:8px;font-size:13px;">
+    نسخه آزمایشی سایت
+  </p>
 </footer>
 
 
 <script>
 
-/* منوی اصلی */
+const leagueData = {
 
-const navButtons = document.querySelectorAll(".nav-btn");
-const pages = document.querySelectorAll(".page");
+  laliga: [
+    ["1","رئال مادرید","38","29","7","2","94"],
+    ["2","بارسلونا","38","28","6","4","90"],
+    ["3","اتلتیکو مادرید","38","24","8","6","80"],
+    ["4","اتلتیک بیلبائو","38","19","10","9","67"],
+    ["5","ویارئال","38","18","9","11","63"]
+  ],
 
-navButtons.forEach(button => {
+  premier: [
+    ["1","لیورپول","38","28","7","3","91"],
+    ["2","آرسنال","38","25","8","5","83"],
+    ["3","منچسترسیتی","38","23","8","7","77"],
+    ["4","چلسی","38","20","9","9","69"],
+    ["5","نیوکاسل","38","19","7","12","64"]
+  ],
 
-    button.addEventListener("click", () => {
+  seriea: [
+    ["1","اینتر","38","28","6","4","90"],
+    ["2","میلان","38","24","8","6","80"],
+    ["3","یوونتوس","38","21","10","7","73"],
+    ["4","ناپولی","38","20","9","9","69"],
+    ["5","رم","38","18","10","10","64"]
+  ],
 
-        const target = button.dataset.page;
+  bundesliga: [
+    ["1","بایرن مونیخ","34","27","5","2","86"],
+    ["2","بایر لورکوزن","34","23","7","4","76"],
+    ["3","دورتموند","34","21","6","7","69"],
+    ["4","لایپزیگ","34","19","8","7","65"],
+    ["5","فرانکفورت","34","17","9","8","60"]
+  ],
 
-        navButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
+  ligue1: [
+    ["1","پاری سن ژرمن","34","27","5","2","86"],
+    ["2","مارسی","34","22","7","5","73"],
+    ["3","موناکو","34","20","8","6","68"],
+    ["4","لیون","34","18","7","9","61"],
+    ["5","لیل","34","17","9","8","60"]
+  ],
 
-        button.classList.add("active");
+  iran: [
+    ["1","پرسپولیس","30","20","7","3","67"],
+    ["2","استقلال","30","18","8","4","62"],
+    ["3","سپاهان","30","17","8","5","59"],
+    ["4","تراکتور","30","16","9","5","57"],
+    ["5","گل‌گهر","30","13","10","7","49"]
+  ]
 
-        pages.forEach(page => {
-            page.classList.remove("active");
-        });
-
-        document.getElementById(target).classList.add("active");
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    });
-
-});
-
-
-/* تب‌های بازی */
-
-const matchTabs = document.querySelectorAll(".tab");
-
-matchTabs.forEach(tab => {
-
-    tab.addEventListener("click", () => {
-
-        const target = tab.dataset.match;
-
-        matchTabs.forEach(t => {
-            t.classList.remove("active");
-        });
-
-        tab.classList.add("active");
-
-        document.querySelectorAll(".match-list").forEach(list => {
-            list.classList.add("hidden");
-        });
-
-        document.getElementById(target).classList.remove("hidden");
-
-    });
-
-});
+};
 
 
-/* جستجوی بازی */
+function showPage(pageId, button){
 
-const matchSearch = document.getElementById("matchSearch");
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
 
-matchSearch.addEventListener("input", () => {
+  document.getElementById(pageId).classList.add("active");
 
-    const text = matchSearch.value.trim().toLowerCase();
+  document.querySelectorAll("nav button").forEach(function(btn){
+    btn.classList.remove("active");
+  });
 
-    document.querySelectorAll("#today .searchable").forEa
+  button.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function filterGames(day, button){
+
+  document.querySelectorAll(".tabs button").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.querySelectorAll("#gamesList .match").forEach(function(match){
+
+    if(match.dataset.day === day){
+      match.style.display = "block";
+    }else{
+      match.style.display = "none";
+    }
+
+  });
+
+}
+
+
+function searchGames(){
+
+  const search =
+    document.getElementById("teamSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  document.querySelectorAll("#gamesList .match").forEach(function(match){
+
+    const text = match.innerText.toLowerCase();
+
+    if(text.includes(search)){
+      match.style.display = "block";
+    }else{
+      match.style.display = "none";
+    }
+
+  });
+
+}
+
+
+function searchTeams(){
+
+  const search =
+    document.getElementById("teamPageSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  document.querySelectorAll("#teamsList .searchable").forEach(function(team){
+
+    const text = team.innerText.toLowerCase();
+
+    team.style.display =
+      text.includes(search) ? "block" : "none";
+
+  });
+
+}
+
+
+function searchPlayers(){
+
+  const search =
+    document.getElementById("playerSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  document.querySelectorAll("#playersList .searchable").forEach(function(player){
+
+    const text = player.innerText.toLowerCase();
+
+    player.style.display =
+      text.includes(search) ? "flex" : "none";
+
+  });
+
+}
+
+
+function changeLeague(){
+
+  const selected =
+    document.getElementById("leagueSelect").value;
+
+  const teams = leagueData[selected];
+
+  let html = `
+    <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>تیم</th>
+          <th>بازی</th>
+          <th>برد</th>
+          <th>مساوی</th>
+          <th>باخت</th>
+          <th>امتیاز</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  teams.forEach(function(team){
+
+    html += `
+      <tr>
+        <td class="position">${team[0]}</td>
+        <td><strong>${team[1]}</strong></td>
+        <td>${team[2]}</td>
+        <td>${team[3]}</td>
+        <td>${team[4]}</td>
+        <td>${team[5]}</td>
+        <td><strong>${team[6]}</strong></td>
+      </tr>
+    `;
+
+  });
+
+  html += `
+      </tbody>
+    </table>
+    </div>
+  `;
+
+  document.getElementById("leagueTable").innerHTML = html;
+}
+
+
+changeLeague();
+
+filterGames(
+  "today",
+  document.querySelector(".tabs button")
+);
+
+</script>
+
+</body>
+            </html>
