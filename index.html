@@ -1627,6 +1627,602 @@ renderNews();
 
 showPage("home");
 
+<script>
+
+const news = [
+  {
+    title:"رئال مادرید برای بازی بزرگ آماده می‌شود",
+    category:"team",
+    date:"امروز",
+    text:"تمرینات تیم برای دیدار مهم پیش رو ادامه دارد."
+  },
+  {
+    title:"ستاره جدید فوتبال مورد توجه باشگاه‌ها",
+    category:"transfer",
+    date:"امروز",
+    text:"چند باشگاه مطرح شرایط این بازیکن را دنبال می‌کنند."
+  },
+  {
+    title:"نتایج مهم فوتبال اروپا",
+    category:"match",
+    date:"دیروز",
+    text:"چند دیدار جذاب در لیگ‌های اروپایی برگزار شد."
+  },
+  {
+    title:"عملکرد درخشان یک مهاجم جوان",
+    category:"player",
+    date:"دیروز",
+    text:"این بازیکن در هفته‌های اخیر آمار خوبی ثبت کرده است."
+  }
+];
+
+
+function renderNews(){
+
+  const box = document.getElementById("newsGrid");
+
+  if(!box) return;
+
+  const searchInput =
+    document.getElementById("newsSearch");
+
+  const categoryInput =
+    document.getElementById("newsCategory");
+
+  const q = searchInput
+    ? searchInput.value.trim().toLowerCase()
+    : "";
+
+  const cat = categoryInput
+    ? categoryInput.value
+    : "all";
+
+  const data = news.filter(function(n){
+
+    const text =
+      (n.title + " " + n.text).toLowerCase();
+
+    return (
+      (!q || text.includes(q)) &&
+      (cat === "all" || n.category === cat)
+    );
+
+  });
+
+  if(!data.length){
+
+    box.innerHTML =
+      "<p>خبری پیدا نشد.</p>";
+
+    return;
+  }
+
+  box.innerHTML = data.map(function(n,i){
+
+    return `
+      <div class="news-card"
+           onclick="openNews(${i})">
+
+        <span class="news-meta">
+          📰 ${n.date}
+        </span>
+
+        <h3>${n.title}</h3>
+
+        <p>${n.text}</p>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* تغییر صفحه */
+
+function showPage(page){
+
+  document.querySelectorAll(".page")
+    .forEach(function(p){
+
+      p.classList.add("hidden");
+
+    });
+
+
+  const target =
+    document.getElementById(page);
+
+
+  if(!target){
+
+    console.log("Page not found:",page);
+
+    return;
+  }
+
+
+  target.classList.remove("hidden");
+
+
+  if(page === "home"){
+    renderHome();
+  }
+
+  if(page === "games"){
+    renderGames();
+  }
+
+  if(page === "leagues"){
+    renderLeague();
+  }
+
+  if(page === "teams"){
+    renderTeams();
+  }
+
+  if(page === "players"){
+    renderPlayers();
+  }
+
+  if(page === "news"){
+    renderNews();
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* تغییر روز بازی‌ها */
+
+function changeDay(day){
+
+  const date =
+    document.getElementById("selectedDate");
+
+  if(!date) return;
+
+
+  if(day === "today"){
+
+    date.textContent =
+      "📅 بازی‌های امروز";
+
+  }
+
+
+  if(day === "tomorrow"){
+
+    date.textContent =
+      "📅 بازی‌های فردا";
+
+  }
+
+
+  if(day === "results"){
+
+    date.textContent =
+      "📅 نتایج بازی‌ها";
+
+  }
+
+
+  renderGames();
+
+}
+
+
+/* انتخاب تاریخ */
+
+function changeDate(){
+
+  const input =
+    document.getElementById("gameDate");
+
+  const output =
+    document.getElementById("selectedDate");
+
+
+  if(!input || !output) return;
+
+
+  if(input.value){
+
+    output.textContent =
+      "📅 تاریخ انتخاب‌شده: " +
+      input.value;
+
+  }
+
+}
+
+
+/* جستجوی کلی */
+
+function globalSearch(){
+
+  const input =
+    document.getElementById("globalSearchInput");
+
+  if(!input) return;
+
+
+  const q =
+    input.value.trim().toLowerCase();
+
+
+  if(!q){
+
+    return;
+  }
+
+
+  const team =
+    Object.values(teams).find(function(t){
+
+      return t.name
+        .toLowerCase()
+        .includes(q);
+
+    });
+
+
+  const player =
+    players.find(function(p){
+
+      return p.name
+        .toLowerCase()
+        .includes(q);
+
+    });
+
+
+  const match =
+    matches.find(function(m){
+
+      const names =
+        m.home.name + " " +
+        m.away.name;
+
+      return names
+        .toLowerCase()
+        .includes(q);
+
+    });
+
+
+  if(team){
+
+    showPage("teams");
+
+    const search =
+      document.getElementById(
+        "teamSearchPage"
+      );
+
+    if(search){
+
+      search.value = q;
+
+      renderTeams();
+
+    }
+
+    return;
+  }
+
+
+  if(player){
+
+    showPage("players");
+
+    const search =
+      document.getElementById(
+        "playerSearch"
+      );
+
+    if(search){
+
+      search.value = q;
+
+      renderPlayers();
+
+    }
+
+    return;
+  }
+
+
+  if(match){
+
+    showPage("games");
+
+    const search =
+      document.getElementById(
+        "teamSearch"
+      );
+
+    if(search){
+
+      search.value = q;
+
+      renderGames();
+
+    }
+
+    return;
+  }
+
+
+  alert("موردی پیدا نشد.");
+
+}
+
+
+/* اطلاعات تیم */
+
+function openTeam(name){
+
+  const t =
+    Object.values(teams).find(function(x){
+
+      return x.name === name;
+
+    });
+
+
+  if(!t) return;
+
+
+  alert(
+    "👕 " + t.name +
+    "\n\n" +
+    "🌍 کشور: اطلاعات نمونه" +
+    "\n🏆 لیگ: اطلاعات نمونه" +
+    "\n👤 مربی: اطلاعات نمونه" +
+    "\n\n" +
+    "برای دیدن بازی‌های تیم، بخش بازی‌ها را باز کنید."
+  );
+
+}
+
+
+/* اطلاعات بازیکن */
+
+function openPlayer(name){
+
+  const p =
+    players.find(function(x){
+
+      return x.name === name;
+
+    });
+
+
+  if(!p) return;
+
+
+  alert(
+    "👤 " + p.name +
+    "\n\n" +
+    "👕 تیم: " + p.team.name +
+    "\n⚽ پست: " + p.pos +
+    "\n🔢 شماره: " + p.number +
+    "\n⚽ گل: " + p.goals +
+    "\n🎯 پاس گل: " + p.assists +
+    "\n👕 بازی: " + p.apps
+  );
+
+}
+
+
+/* نمایش خبر */
+
+function openNews(index){
+
+  const n = news[index];
+
+  if(!n) return;
+
+
+  alert(
+    "📰 " + n.title +
+    "\n\n" +
+    n.text +
+    "\n\n" +
+    "📅 " + n.date
+  );
+
+}
+
+
+/* علاقه‌مندی‌ها */
+
+function favorite(id){
+
+  let list =
+    JSON.parse(
+      localStorage.getItem(
+        "footballFavorites"
+      ) || "[]"
+    );
+
+
+  if(list.includes(id)){
+
+    list =
+      list.filter(function(x){
+
+        return x !== id;
+
+      });
+
+    alert(
+      "از علاقه‌مندی‌ها حذف شد ⭐"
+    );
+
+  }else{
+
+    list.push(id);
+
+    alert(
+      "به علاقه‌مندی‌ها اضافه شد ⭐"
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "footballFavorites",
+    JSON.stringify(list)
+  );
+
+}
+
+
+/* حالت تاریک */
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+
+  localStorage.setItem(
+    "footballDark",
+
+    document.body.classList.contains("dark")
+      ? "1"
+      : "0"
+  );
+
+}
+
+
+/* بروزرسانی */
+
+function refreshSite(){
+
+  renderHome();
+  renderGames();
+  renderLeague();
+  renderTeams();
+  renderPlayers();
+  renderNews();
+
+
+  alert(
+    "✅ اطلاعات سایت بروزرسانی شد."
+  );
+
+}
+
+
+/* اعلان */
+
+function notifyGame(){
+
+  if(!("Notification" in window)){
+
+    alert(
+      "مرورگر شما اعلان را پشتیبانی نمی‌کند."
+    );
+
+    return;
+  }
+
+
+  if(Notification.permission === "granted"){
+
+    new Notification(
+      "⚽ فوتبالی",
+      {
+        body:"یک بازی مهم شروع شد!"
+      }
+    );
+
+    return;
+  }
+
+
+  Notification.requestPermission()
+    .then(function(permission){
+
+      if(permission === "granted"){
+
+        new Notification(
+          "⚽ فوتبالی",
+          {
+            body:"اعلان‌های فوتبالی فعال شد."
+          }
+        );
+
+      }
+
+    });
+
+}
+
+
+/* بازیابی حالت تاریک */
+
+if(
+  localStorage.getItem("footballDark")
+  === "1"
+){
+
+  document.body.classList.add("dark");
+
+}
+
+
+/* تاریخ اولیه */
+
+const dateInput =
+  document.getElementById("gameDate");
+
+
+if(dateInput){
+
+  const now = new Date();
+
+  dateInput.value =
+    now.toISOString()
+      .split("T")[0];
+
+}
+
+
+const selectedDate =
+  document.getElementById(
+    "selectedDate"
+  );
+
+
+if(selectedDate){
+
+  selectedDate.textContent =
+    "📅 بازی‌های امروز";
+
+}
+
+
+/* اجرای اولیه */
+
+renderHome();
+renderGames();
+renderLeague();
+renderTeams();
+renderPlayers();
+renderNews();
+
+showPage("home");
+
+
 </script>
 
 </body>
